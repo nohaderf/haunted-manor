@@ -16,17 +16,17 @@ class HauntedManorApp
         def welcome
             system("clear")
             puts "Welcome to...."
-            sleep(2)
+            sleep(1.25)
             artii = Artii::Base.new
-            artii.asciify('THE HAUNTED MANOR')
-            puts artii.asciify('THE HAUNTED MANOR')
+            artii.asciify('THE    HAUNTED    MANOR')
+            puts artii.asciify('THE    HAUNTED    MANOR')
         end
     
     # LOGIN MENU
     
         def self.menu
             prompt = TTY::Prompt.new
-            sleep(1.5)
+            sleep(1)
             welcome_menu = prompt.select ("Please log in or create an account") do |option|
                 option.choice "Log In"
                 option.choice "Create an Account"
@@ -70,6 +70,7 @@ class HauntedManorApp
                 missing_player = prompt.select("Username or Password not found.") do |option|
                     option.choice "Log In"
                     option.choice "Create an Account"
+                    system("clear")
                 end
              end
             if missing_player == "Log In"
@@ -101,7 +102,7 @@ class HauntedManorApp
                 option.choice "Return to Main Menu"
             end
             if select == "New Game"
-                @player.player.start #wherever we want to start the game
+                Player.start #wherever we want to start the game
             elsif select == "Update Account"
                 username = prompt.ask("Please choose a new Username.")
                 password = prompt.mask("Please choose a new Password.", mask: lantern)
@@ -116,10 +117,12 @@ class HauntedManorApp
                     option.choice "Return to Main Menu"
                 end
             elsif select == "Delete Account"
-                @player.destroy(username: username, password: password)
+                @player.destroy
+                system("clear")
                 puts "Account deleted."
                 sleep(1)
                 puts "Sorry, to see you go 😈."
+                HauntedManorApp.menu
             elsif select == "Log Out"
                 HauntedManorApp.logout
             elsif select == "Return to Main Menu"

@@ -4,7 +4,13 @@ class Player < ActiveRecord::Base
     has_many :visited_rooms
     has_many :rooms, through: :visited_rooms
 
-    def choose_room
+    def self.start
+        puts "Find your way out of the manor. Fight the monsters."
+        sleep(2)
+        Player.choose_room
+    end
+
+    def self.choose_room
         prompt = TTY::Prompt.new
         room = prompt.select("What room would you like to go to?") do |option|
             option.choice = "Kitchen"
