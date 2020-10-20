@@ -6,6 +6,10 @@ class Room < ActiveRecord::Base
     def self.enter_room(room)
         system("clear")
         prompt = TTY::Prompt.new
-        puts Room.find_by(name: room).description
+        current_room = Room.find_by(name: room)
+        moonster = Monster.find_by(id: current_room.monster_id).name
+        system("clear")
+        puts current_room.description
+        puts moonster
     end
 end
