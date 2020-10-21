@@ -103,7 +103,6 @@ class HauntedManorApp
             end
             if select == "New Game"
                 Player.start #wherever we want to start the game
-                Room.all.each {|room| room.monster_id = rand(1..8)}
             elsif select == "Update Account"
                 username = prompt.ask("Please choose a new Username.")
                 password = prompt.mask("Please choose a new Password.", mask: lantern)
