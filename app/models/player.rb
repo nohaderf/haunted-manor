@@ -35,9 +35,9 @@ class Player < ActiveRecord::Base
             option.choice "Dining Room"
             option.choice ">> Quit"
         end
-        #Room.find{|option| option == room}
-        #Room.all.each{|menu| menu.choice = Room.name}
-        #not sure if this would work instead of writing out all 8
+        # Room.find{ |option| option == room }
+        # Room.all.each{|menu| menu.choice = Room.name }
+        # not sure if this would work instead of writing out all 8
         if room == "Kitchen"
             Room.enter_room(room)
         elsif room == "Ballroom"
