@@ -23,7 +23,7 @@ class Player < ActiveRecord::Base
         prompt = TTY::Prompt.new
         system("clear")
         puts "Find your way out of the manor. Fight the monsters. \n \n"
-        sleep(1.5)
+        sleep(1.15)
         room = prompt.select("Which room would you like to explore?") do |option|
             option.choice "Kitchen"
             option.choice "Ballroom"
@@ -67,11 +67,10 @@ class Player < ActiveRecord::Base
         option.choice "No"
         }
         if quit == "Yes"
-            system("clear")
-            HauntedManorApp.menu
+            exit!
         elsif quit == "No"
             system("clear")
-            HauntedManorApp.player_menu
+            Player.choose_room
         end
     end
     

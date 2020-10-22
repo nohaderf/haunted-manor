@@ -89,6 +89,7 @@ class HauntedManorApp
 #############################################################
 #                      PLAYER MENU
 #############################################################
+    
     def self.player_menu
         prompt = TTY::Prompt.new
         lantern = prompt.decorate('🎃') 
@@ -148,8 +149,8 @@ class HauntedManorApp
 
     def self.assign_monster_to_room
         Room.all.each do |room| 
-            rand_number = rand(1..8)
-            session_monster_id = Monster.find_by(number: rand_number).id 
+            rand_monster_num = rand(1..8)
+            session_monster_id = Monster.find_by(number: rand_monster_num).id 
             room.update(monster_id: session_monster_id) 
         end
     end

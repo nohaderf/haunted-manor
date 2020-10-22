@@ -37,8 +37,8 @@ class Room < ActiveRecord::Base
         dice = 1 + rand(6)
         if dice > 3
             puts "It's been stunned!"
-            sleep(1)
-            puts "You look around for a possible exit."
+            sleep(1.5)
+            puts "\nYou look around for a possible exit."
             Room.exit_check
         else
             HauntedManorApp.health(3) 
@@ -54,15 +54,13 @@ class Room < ActiveRecord::Base
     end
 
     def self.exit_check
-        system("clear")
         prompt = TTY::Prompt.new
         if @current_room.exit == false
-            system("clear")
-            puts "You're barricaded. It's best to try other rooms."
+            sleep(2)
+            puts "\nYou're barricaded. It's best to try other rooms."
             prompt.keypress("\nPress to go back", keys: [:space, :return])
             Player.choose_room
         elsif @current_room.exit == true
-            system("clear")
             puts "As you approach the window, you welcome a slight breeze touching you skin."
             sleep(1.25)
             puts "The air never seemed more fresh compared to the stale, stuffy manor."
