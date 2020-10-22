@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_122842) do
+ActiveRecord::Schema.define(version: 2020_10_22_134546) do
 
   create_table "monsters", force: :cascade do |t|
     t.string "name"
-    t.integer "strength"
     t.integer "number"
   end
 
   create_table "players", force: :cascade do |t|
     t.string "username"
     t.string "password"
-    t.integer "strength"
     t.integer "health"
   end
 
@@ -31,11 +29,6 @@ ActiveRecord::Schema.define(version: 2020_10_22_122842) do
     t.integer "monster_id"
     t.boolean "exit"
     t.integer "number"
-  end
-
-  create_table "visited_rooms", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "room_id"
   end
 
 end

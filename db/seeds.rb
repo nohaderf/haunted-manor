@@ -2,19 +2,19 @@ Monster.destroy_all
 Player.destroy_all
 Room.destroy_all
 
-# Monsters (name, strength, number)
-monster1 = Monster.create(name: "Mummy", strength: 3, number: 1)
-monster2 = Monster.create(name: "Zombie", strength: 4, number: 2)
-monster3 = Monster.create(name: "Vampire", strength: 5, number: 3)
-monster4 = Monster.create(name: "Clown", strength: 1, number: 4)
-monster5 = Monster.create(name: "Witch", strength: 10, number: 5)
-monster6 = Monster.create(name: "Dragon", strength: 2, number: 6)
-monster7 = Monster.create(name: "Ogre", strength: 2, number: 7)
-monster8 = Monster.create(name: "Ghost", strength: 3, number: 8)
+# Monsters (name, number)
+monster1 = Monster.create(name: "Mummy", number: 1)
+monster2 = Monster.create(name: "Zombie", number: 2)
+monster3 = Monster.create(name: "Vampire", number: 3)
+monster4 = Monster.create(name: "Clown", number: 4)
+monster5 = Monster.create(name: "Witch", number: 5)
+monster6 = Monster.create(name: "Dragon", number: 6)
+monster7 = Monster.create(name: "Ogre", number: 7)
+monster8 = Monster.create(name: "Ghost", number: 8)
 
-# Players (username, password, strength, health)
-player1 = Player.create(username: "lee", password: "password", strength: 8, health: nil)
-player2 = Player.create(username: "freda", password: "anotherpassword", strength: 6, health: nil)
+# Players (username, password, health)
+player1 = Player.create(username: "lee", password: "password", health: nil)
+player2 = Player.create(username: "freda", password: "anotherpassword", health: nil)
 
 # Rooms (name, description, monster_id, exit, number)
 room1 = Room.create(name: "Kitchen", description: "You enter a tiny kitchen, where you notice all of the cabinet’s doors have been ripped off their hinges. \nStains of every color painting the room, only visible from the faint light of the blue flames from the stove top. \nYou hear rustling in the corner. \nThe sounds of pots and pans falling onto each other, hitting the linoleum floor.  \nYou turn your gaze to see a", monster_id: nil, exit: false, number: 1)
@@ -26,8 +26,3 @@ room6 = Room.create(name: "Library", description: "Papers littered the floor cir
 room7 = Room.create(name: "Lounge", description: "The rough wear of paintwork and wooden splinters of the door meet you first.  \nSquealing hinges announcing you to the room before you even step a foot in.  \nThe stench of booze and cigarettes assault your sense, where leisuring on the sofa you see", monster_id: nil, exit: false, number: 6)
 room8 = Room.create(name: "Billard Room", description: "Entering you immediately see the billiards table split savagely in half, with the foulest smelling stain coming from where both halves of the table cave into the floor.  \nThe cues are all sticking out of the walls as if they were darts.  \nYou hear the distinct sound of the start of a pool game and see a", monster_id: nil, exit: false, number: 7)
 room9 = Room.create(name: "Study", description: "The table dominated the room.  \nAn elongated ellipse of mahogany with brass at the edges.  \nThe chairs from the same tree.  \nThe table was set and ready for a feast, at least it was at some point in time before all this food became rotted.  \nBut the distinct sounds of eating without remorse can be heard, not stopping to meet your eyes is the", monster_id: nil, exit: false,  number: 8)
-
-
-# # Visited Rooms (player_id, room_id)
-# vr_1 = VisitedRoom.create(player_id: player1.id, room_id: room1.id)
-# vr_2 = VisitedRoom.create(player_id: player2.id, room_id: room1.id)

@@ -1,11 +1,9 @@
 class Player < ActiveRecord::Base
-    #changed relationships a bit
     has_many :rooms
     has_many :monsters, through: :rooms
 
     def self.start
         HauntedManorApp.default_health
-        # HauntedManorApp.starting_strength
         HauntedManorApp.assign_monster_to_room
         HauntedManorApp.rand_exit
         Player.intro
@@ -82,9 +80,7 @@ class Player < ActiveRecord::Base
         system("clear")
         puts "Stats"
         puts "Username: #{self.username}"
-        # puts "Strength: #{self.strength}"
         puts "Health: #{self.health}"
     end
 
-
-end
+end # end of class
