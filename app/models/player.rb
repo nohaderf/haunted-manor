@@ -4,8 +4,9 @@ class Player < ActiveRecord::Base
     has_many :monsters, through: :rooms
 
     def self.start
-        HauntedManorApp.assign_monster_to_room
         HauntedManorApp.default_health
+        HauntedManorApp.starting_strength
+        HauntedManorApp.assign_monster_to_room
         sleep(2)
         Player.intro
     end
@@ -15,7 +16,7 @@ class Player < ActiveRecord::Base
         hall = Room.find_by(name: "Hall")
         system("clear")
         puts hall.description
-        sleep(2)
+        sleep(1.25)
         prompt.keypress("\nContinue...", keys: [:space, :return])
         Player.choose_room
     end
@@ -56,13 +57,14 @@ class Player < ActiveRecord::Base
         elsif room == "Dining Room"
             Room.enter_room(room)
         elsif room == ">> Quit"
-            Player.save_and_quit
+            Player.quit
         end
     end
 
-    def self.save_and_quit
+    def self.quit
+        system("clear")
         prompt = TTY::Prompt.new
-        quit = prompt.select("Save and quit?") {|option|
+        quit = prompt.select("Quit the game?") {|option|
         option.choice "Yes"
         option.choice "No"
         }
