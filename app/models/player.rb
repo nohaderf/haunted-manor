@@ -17,7 +17,7 @@ class Player < ActiveRecord::Base
         system("clear")
         puts hall.description
         sleep(1.25)
-        prompt.keypress("\nContinue...", keys: [:space, :return])
+        prompt.keypress("\nPress to continue...", keys: [:space, :return])
         Player.choose_room
     end
 

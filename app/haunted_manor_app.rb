@@ -20,7 +20,9 @@ class HauntedManorApp
             puts artii.asciify('THE    HAUNTED    MANOR')
         end
     
-    # LOGIN MENU
+    #############################################################
+    #                       MAIN MENU
+    #############################################################
     
         def self.menu
             prompt = TTY::Prompt.new
@@ -40,7 +42,6 @@ class HauntedManorApp
                 exit!
             end
         end
-    
     
         def self.create_account
             prompt = TTY::Prompt.new
@@ -88,12 +89,16 @@ class HauntedManorApp
             HauntedManorApp.menu
         end
     
-        # PLAYER MENU
+    #############################################################
+    #                      PLAYER MENU
+    #############################################################
         def self.player_menu
             prompt = TTY::Prompt.new
             lantern = prompt.decorate('🎃') 
+            system("clear")
             puts "Glad you can join us, #{@player.username}."
-            select = prompt.select("What would you like to do?") do |option|
+            sleep(1.25)
+            select = prompt.select("\nWhat would you like to do?") do |option|
                 option.choice "New Game"
                 option.choice "Update Account"
                 option.choice "Delete Account"
@@ -141,16 +146,14 @@ class HauntedManorApp
             end
         end
 
-        # DEFAULT STARTING SETTINGS
+    #############################################################
+    #              NEW GAME DEFAULT SETTINGS
+    #############################################################
         def self.assign_monster_to_room
             Room.all.each do |room| 
-                rand_number = rand(1..8) # to get a random monster number
-                # match monster to the monster_number
+                rand_number = rand(1..8)
                 session_monster_id = Monster.find_by(number: rand_number).id 
-                # so i got the monster_id's.......
-                # now i need to assign it to the room (currently nil)
-                # @room_inst = Room.all.find_by(monster_id: @session_monster_id)
-                room.update(monster_id: session_monster_id) # assign that id to each respective room
+                room.update(monster_id: session_monster_id) 
             end
         end
 
@@ -164,44 +167,10 @@ class HauntedManorApp
             @player.update(strength: rand_strength)
         end
 
-        # # HELPER METHODS
-        # ################### Random win #######################################
-        def self.fight
-            prompt = TTY::Prompt.new
-            dice = 1 + rand(6)
-            if dice > 3
-                puts "It's been stunted!"
-                sleep(1)
-                puts "You look around for a possible exit."
-                Room.exit_check
-            else
-                HauntedManorApp.health(3) # DUBUG?!!!
-                system("clear")
-                puts "You're no match!"
-                sleep(1)
-                puts "Your health has decreased by 3 points."
-                sleep(1)
-                puts "RUN AWAY!!!"
-                prompt.keypress("\nPress to go back", keys: [:space, :return])
-                Player.choose_room
-            end
-        end
+    #############################################################
+    #                       STATS & HEALTH
+    #############################################################
 
-
-
-        # ######## IF WE WANT TO BASE FIGHTING OFF STRENGTH #################
-        # def self.fight
-        #     # need to find instance of player and monster
-        #     if @player.strength > Monster.all.find_by(strength
-        #         Room.exit_check
-        #     elsif @player.strength < Monster.strength
-        #         HauntedManorApp.health(3)
-        #         @player.update(health: update_health)
-        #     end
-        # end
-        #####################################################################
-   
-        # STATS
         def self.stats
             prompt = TTY::Prompt.new
             system("clear")
@@ -223,6 +192,9 @@ class HauntedManorApp
             end
         end
 
+    #############################################################
+    #                      END OF GAME
+    #############################################################
         def self.game_over
             prompt = TTY::Prompt.new
             system('clear')
@@ -243,10 +215,10 @@ class HauntedManorApp
             prompt = TTY::Prompt.new
             system('clear')
             puts "Congratulations, #{@player.username}!"
-            sleep(1)
-            puts "You have escaped the Haunted Manor. \n"
+            sleep(1.5)
+            puts "You have escaped the Haunted Manor."
             sleep(0.5)
-            select = prompt.select("Would you like to play again?") do |option|
+            select = prompt.select("\nWould you like to play again?") do |option|
                 option.choice "Yes"
                 option.choice "No"
             end
