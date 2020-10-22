@@ -61,15 +61,17 @@ class Room < ActiveRecord::Base
             prompt.keypress("\nPress to go back", keys: [:space, :return])
             Player.choose_room
         elsif @current_room.exit == true
-            puts "As you approach the window, you welcome a slight breeze touching your skin."
-            sleep(1.25)
-            puts "The air never seemed more fresh compared to that of the stale, stuffy manor."
-            sleep(1.25)
-            puts "You don't know what's awaiting outside, but it's probably a lot better than staying here."
-            sleep(1.25)
-            puts "You take your chance..."
             sleep(2)
-            puts "You're free!"
+            puts "As you approach the window, you welcome a slight breeze touching your skin."
+            sleep(2)
+            puts "The air never seemed more fresh compared to that of the stale, stuffy manor."
+            sleep(2)
+            puts "You don't know what's awaiting outside, but it's probably a lot better than staying here."
+            sleep(2)
+            puts "You take your chance...\n"
+            sleep(2.5)
+            puts "\nYou're free!"
+            sleep(1.5)
             prompt.keypress("\nPress to continue", keys: [:space, :return])
             HauntedManorApp.win
         end

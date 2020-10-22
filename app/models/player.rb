@@ -3,6 +3,7 @@ class Player < ActiveRecord::Base
     has_many :monsters, through: :rooms
 
     def self.start
+        HauntedManorApp.reset_exit
         HauntedManorApp.default_health
         HauntedManorApp.assign_monster_to_room
         HauntedManorApp.rand_exit

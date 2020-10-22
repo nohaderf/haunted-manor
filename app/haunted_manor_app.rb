@@ -10,7 +10,7 @@ class HauntedManorApp
 
     def welcome
         system("clear")
-        puts "Welcome to...."
+        puts "Welcome to..."
         sleep(1.15)
         artii = Artii::Base.new
         artii.asciify('THE    HAUNTED    MANOR')
@@ -150,8 +150,8 @@ class HauntedManorApp
     def self.assign_monster_to_room
         Room.all.each do |room| 
             rand_monster_num = rand(1..8)
-            session_monster_id = Monster.find_by(number: rand_monster_num).id 
-            room.update(monster_id: session_monster_id) 
+            @session_monster_id = Monster.find_by(number: rand_monster_num).id 
+            room.update(monster_id: @session_monster_id) 
         end
     end
 
@@ -163,6 +163,10 @@ class HauntedManorApp
         rand_room_num = rand(1..8)
         @room_inst = Room.find_by(number: rand_room_num)
         @room_inst.update(exit: true)
+    end
+
+    def self.reset_exit
+        Room.all.update(exit: false)
     end
 
 #############################################################
@@ -193,38 +197,36 @@ class HauntedManorApp
 #############################################################
 #                      END OF GAME
 #############################################################
+    
     def self.game_over
-        prompt = TTY::Prompt.new
         system('clear')
         puts "Sorry, #{@player.username}. The monsters are currently feasting on your lifeless body."
         sleep(2)
-        select = prompt.select("Would you like to play again?") do |option|
-            option.choice "Yes"
-            option.choice "No"
-        end
-        if select == "Yes"
-            Player.start
-        elsif select == "No"
-            exit!
-        end
+        HauntedManorApp.play_again?
     end
 
     def self.win
-        prompt = TTY::Prompt.new
         system('clear')
         puts "Congratulations, #{@player.username}!"
         sleep(1.5)
         puts "You have escaped the Haunted Manor."
-        sleep(0.5)
+        sleep(1.5)
+        HauntedManorApp.play_again?
+    end
+
+    def self.play_again?
+        prompt = TTY::Prompt.new
         select = prompt.select("\nWould you like to play again?") do |option|
             option.choice "Yes"
             option.choice "No"
+            option.choice ">> Player Menu"
         end
         if select == "Yes"
             Player.start 
         elsif select == "No"
             exit!
+        elsif select == ">> Player Menu"
+            HauntedManorApp.player_menu
         end
     end
-
  end #end of class
