@@ -46,8 +46,8 @@ class HauntedManorApp
         def self.create_account
             prompt = TTY::Prompt.new
             boo = prompt.decorate('👻') 
-            username = prompt.ask("Please choose a Username.")
-            password = prompt.mask("Please choose a Password.", mask: boo)
+            username = prompt.ask("Please choose a Username:")
+            password = prompt.mask("Please choose a Password:", mask: boo)
             player = Player.create(username: username, password: password)
             puts "Congratulations. User created:"
             sleep(1)
@@ -149,6 +149,7 @@ class HauntedManorApp
     #############################################################
     #              NEW GAME DEFAULT SETTINGS
     #############################################################
+
         def self.assign_monster_to_room
             Room.all.each do |room| 
                 rand_number = rand(1..8)
@@ -162,13 +163,20 @@ class HauntedManorApp
         end
 
         # currently irrelevant
-        def self.starting_strength
-            rand_strength = 1 + rand(6)
-            @player.update(strength: rand_strength)
+        # def self.starting_strength
+        #     rand_strength = 1 + rand(6)
+        #     @player.update(strength: rand_strength)
+        # end
+
+        def self.rand_exit
+            rand_room_num = rand(1..8)
+            @room_inst = Room.find_by(number: rand_room_num)
+            @room_inst.update(exit: true)
         end
 
+
     #############################################################
-    #                       STATS & HEALTH
+    #                     STATS & HEALTH
     #############################################################
 
         def self.stats
@@ -176,7 +184,7 @@ class HauntedManorApp
             system("clear")
             puts "-- STATS -- "
             puts "Username: #{@player.username}"
-            puts "Strength: #{@player.strength}"
+            # puts "Strength: #{@player.strength}"
             puts "Health: #{@player.health}"
             puts "\nFight at your own risk... or never leave."
             prompt.keypress("\nPress enter to go back", keys: [:space, :return])
@@ -232,5 +240,3 @@ class HauntedManorApp
     
     
      end #end of class
-
-     

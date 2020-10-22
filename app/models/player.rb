@@ -5,9 +5,9 @@ class Player < ActiveRecord::Base
 
     def self.start
         HauntedManorApp.default_health
-        HauntedManorApp.starting_strength
+        # HauntedManorApp.starting_strength
         HauntedManorApp.assign_monster_to_room
-        sleep(2)
+        HauntedManorApp.rand_exit
         Player.intro
     end
 
@@ -82,7 +82,7 @@ class Player < ActiveRecord::Base
         system("clear")
         puts "Stats"
         puts "Username: #{self.username}"
-        puts "Strength: #{self.strength}"
+        # puts "Strength: #{self.strength}"
         puts "Health: #{self.health}"
     end
 
