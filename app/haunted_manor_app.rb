@@ -8,7 +8,6 @@ class HauntedManorApp
         HauntedManorApp.menu
     end
 
-    private
     def welcome
         system("clear")
         puts "Welcome to...."
@@ -131,9 +130,8 @@ class HauntedManorApp
         elsif select == "All Players"
             system("clear")
             @all_players = Player.pluck(:username)
-            @all_players.join("\n")
             system("clear")
-            puts "#{@all_players}"
+            puts @all_players.join("\n")
             prompt.keypress("\nPress to go back.", keys: [:space, :return])
             HauntedManorApp.player_menu
         elsif select == "Log Out"
