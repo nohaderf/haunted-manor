@@ -36,7 +36,7 @@ class Room < ActiveRecord::Base
         prompt = TTY::Prompt.new
         dice = 1 + rand(6)
         if dice > 3
-            puts "It's been stunted!"
+            puts "It's been stunned!"
             sleep(1)
             puts "You look around for a possible exit."
             Room.exit_check
